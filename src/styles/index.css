@@ -1,0 +1,12 @@
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply bg-crimson text-white;
+}
+
+.app-name {
+  @apply lowercase text-center font-bold my-6 tracking-wider text-4xl;
+  transform: rotate(-3deg);
+}
