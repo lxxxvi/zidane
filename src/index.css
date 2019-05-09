@@ -830,6 +830,10 @@ table {
   background-color: hsl(348, 66%, 50%);
 }
 
+.bg-crimson-light {
+  background-color: hsl(348, 66%, 70%);
+}
+
 .hover\:bg-transparent:hover {
   background-color: transparent;
 }
@@ -1126,6 +1130,10 @@ table {
   background-color: hsl(348, 66%, 50%);
 }
 
+.hover\:bg-crimson-light:hover {
+  background-color: hsl(348, 66%, 70%);
+}
+
 .focus\:bg-transparent:focus {
   background-color: transparent;
 }
@@ -1420,6 +1428,10 @@ table {
 
 .focus\:bg-crimson:focus {
   background-color: hsl(348, 66%, 50%);
+}
+
+.focus\:bg-crimson-light:focus {
+  background-color: hsl(348, 66%, 70%);
 }
 
 .bg-bottom {
@@ -1790,6 +1802,10 @@ table {
   border-color: hsl(348, 66%, 50%);
 }
 
+.border-crimson-light {
+  border-color: hsl(348, 66%, 70%);
+}
+
 .hover\:border-transparent:hover {
   border-color: transparent;
 }
@@ -2086,6 +2102,10 @@ table {
   border-color: hsl(348, 66%, 50%);
 }
 
+.hover\:border-crimson-light:hover {
+  border-color: hsl(348, 66%, 70%);
+}
+
 .focus\:border-transparent:focus {
   border-color: transparent;
 }
@@ -2380,6 +2400,10 @@ table {
 
 .focus\:border-crimson:focus {
   border-color: hsl(348, 66%, 50%);
+}
+
+.focus\:border-crimson-light:focus {
+  border-color: hsl(348, 66%, 70%);
 }
 
 .rounded-none {
@@ -5141,6 +5165,10 @@ table {
   color: hsl(348, 66%, 50%);
 }
 
+.text-crimson-light {
+  color: hsl(348, 66%, 70%);
+}
+
 .hover\:text-transparent:hover {
   color: transparent;
 }
@@ -5437,6 +5465,10 @@ table {
   color: hsl(348, 66%, 50%);
 }
 
+.hover\:text-crimson-light:hover {
+  color: hsl(348, 66%, 70%);
+}
+
 .focus\:text-transparent:focus {
   color: transparent;
 }
@@ -5731,6 +5763,10 @@ table {
 
 .focus\:text-crimson:focus {
   color: hsl(348, 66%, 50%);
+}
+
+.focus\:text-crimson-light:focus {
+  color: hsl(348, 66%, 70%);
 }
 
 .text-xs {
@@ -6161,6 +6197,10 @@ table {
   transform: rotate(-3deg);
 }
 
+.game {
+  margin-top: 1.25rem;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;
@@ -6481,6 +6521,10 @@ table {
     background-color: hsl(348, 66%, 50%);
   }
 
+  .sm\:bg-crimson-light {
+    background-color: hsl(348, 66%, 70%);
+  }
+
   .sm\:hover\:bg-transparent:hover {
     background-color: transparent;
   }
@@ -6777,6 +6821,10 @@ table {
     background-color: hsl(348, 66%, 50%);
   }
 
+  .sm\:hover\:bg-crimson-light:hover {
+    background-color: hsl(348, 66%, 70%);
+  }
+
   .sm\:focus\:bg-transparent:focus {
     background-color: transparent;
   }
@@ -7071,6 +7119,10 @@ table {
 
   .sm\:focus\:bg-crimson:focus {
     background-color: hsl(348, 66%, 50%);
+  }
+
+  .sm\:focus\:bg-crimson-light:focus {
+    background-color: hsl(348, 66%, 70%);
   }
 
   .sm\:bg-bottom {
@@ -7433,6 +7485,10 @@ table {
     border-color: hsl(348, 66%, 50%);
   }
 
+  .sm\:border-crimson-light {
+    border-color: hsl(348, 66%, 70%);
+  }
+
   .sm\:hover\:border-transparent:hover {
     border-color: transparent;
   }
@@ -7729,6 +7785,10 @@ table {
     border-color: hsl(348, 66%, 50%);
   }
 
+  .sm\:hover\:border-crimson-light:hover {
+    border-color: hsl(348, 66%, 70%);
+  }
+
   .sm\:focus\:border-transparent:focus {
     border-color: transparent;
   }
@@ -8023,6 +8083,10 @@ table {
 
   .sm\:focus\:border-crimson:focus {
     border-color: hsl(348, 66%, 50%);
+  }
+
+  .sm\:focus\:border-crimson-light:focus {
+    border-color: hsl(348, 66%, 70%);
   }
 
   .sm\:rounded-none {
@@ -10768,6 +10832,10 @@ table {
     color: hsl(348, 66%, 50%);
   }
 
+  .sm\:text-crimson-light {
+    color: hsl(348, 66%, 70%);
+  }
+
   .sm\:hover\:text-transparent:hover {
     color: transparent;
   }
@@ -11064,6 +11132,10 @@ table {
     color: hsl(348, 66%, 50%);
   }
 
+  .sm\:hover\:text-crimson-light:hover {
+    color: hsl(348, 66%, 70%);
+  }
+
   .sm\:focus\:text-transparent:focus {
     color: transparent;
   }
@@ -11358,6 +11430,10 @@ table {
 
   .sm\:focus\:text-crimson:focus {
     color: hsl(348, 66%, 50%);
+  }
+
+  .sm\:focus\:text-crimson-light:focus {
+    color: hsl(348, 66%, 70%);
   }
 
   .sm\:text-xs {
@@ -12093,6 +12169,10 @@ table {
     background-color: hsl(348, 66%, 50%);
   }
 
+  .md\:bg-crimson-light {
+    background-color: hsl(348, 66%, 70%);
+  }
+
   .md\:hover\:bg-transparent:hover {
     background-color: transparent;
   }
@@ -12389,6 +12469,10 @@ table {
     background-color: hsl(348, 66%, 50%);
   }
 
+  .md\:hover\:bg-crimson-light:hover {
+    background-color: hsl(348, 66%, 70%);
+  }
+
   .md\:focus\:bg-transparent:focus {
     background-color: transparent;
   }
@@ -12683,6 +12767,10 @@ table {
 
   .md\:focus\:bg-crimson:focus {
     background-color: hsl(348, 66%, 50%);
+  }
+
+  .md\:focus\:bg-crimson-light:focus {
+    background-color: hsl(348, 66%, 70%);
   }
 
   .md\:bg-bottom {
@@ -13045,6 +13133,10 @@ table {
     border-color: hsl(348, 66%, 50%);
   }
 
+  .md\:border-crimson-light {
+    border-color: hsl(348, 66%, 70%);
+  }
+
   .md\:hover\:border-transparent:hover {
     border-color: transparent;
   }
@@ -13341,6 +13433,10 @@ table {
     border-color: hsl(348, 66%, 50%);
   }
 
+  .md\:hover\:border-crimson-light:hover {
+    border-color: hsl(348, 66%, 70%);
+  }
+
   .md\:focus\:border-transparent:focus {
     border-color: transparent;
   }
@@ -13635,6 +13731,10 @@ table {
 
   .md\:focus\:border-crimson:focus {
     border-color: hsl(348, 66%, 50%);
+  }
+
+  .md\:focus\:border-crimson-light:focus {
+    border-color: hsl(348, 66%, 70%);
   }
 
   .md\:rounded-none {
@@ -16380,6 +16480,10 @@ table {
     color: hsl(348, 66%, 50%);
   }
 
+  .md\:text-crimson-light {
+    color: hsl(348, 66%, 70%);
+  }
+
   .md\:hover\:text-transparent:hover {
     color: transparent;
   }
@@ -16676,6 +16780,10 @@ table {
     color: hsl(348, 66%, 50%);
   }
 
+  .md\:hover\:text-crimson-light:hover {
+    color: hsl(348, 66%, 70%);
+  }
+
   .md\:focus\:text-transparent:focus {
     color: transparent;
   }
@@ -16970,6 +17078,10 @@ table {
 
   .md\:focus\:text-crimson:focus {
     color: hsl(348, 66%, 50%);
+  }
+
+  .md\:focus\:text-crimson-light:focus {
+    color: hsl(348, 66%, 70%);
   }
 
   .md\:text-xs {
@@ -17705,6 +17817,10 @@ table {
     background-color: hsl(348, 66%, 50%);
   }
 
+  .lg\:bg-crimson-light {
+    background-color: hsl(348, 66%, 70%);
+  }
+
   .lg\:hover\:bg-transparent:hover {
     background-color: transparent;
   }
@@ -18001,6 +18117,10 @@ table {
     background-color: hsl(348, 66%, 50%);
   }
 
+  .lg\:hover\:bg-crimson-light:hover {
+    background-color: hsl(348, 66%, 70%);
+  }
+
   .lg\:focus\:bg-transparent:focus {
     background-color: transparent;
   }
@@ -18295,6 +18415,10 @@ table {
 
   .lg\:focus\:bg-crimson:focus {
     background-color: hsl(348, 66%, 50%);
+  }
+
+  .lg\:focus\:bg-crimson-light:focus {
+    background-color: hsl(348, 66%, 70%);
   }
 
   .lg\:bg-bottom {
@@ -18657,6 +18781,10 @@ table {
     border-color: hsl(348, 66%, 50%);
   }
 
+  .lg\:border-crimson-light {
+    border-color: hsl(348, 66%, 70%);
+  }
+
   .lg\:hover\:border-transparent:hover {
     border-color: transparent;
   }
@@ -18953,6 +19081,10 @@ table {
     border-color: hsl(348, 66%, 50%);
   }
 
+  .lg\:hover\:border-crimson-light:hover {
+    border-color: hsl(348, 66%, 70%);
+  }
+
   .lg\:focus\:border-transparent:focus {
     border-color: transparent;
   }
@@ -19247,6 +19379,10 @@ table {
 
   .lg\:focus\:border-crimson:focus {
     border-color: hsl(348, 66%, 50%);
+  }
+
+  .lg\:focus\:border-crimson-light:focus {
+    border-color: hsl(348, 66%, 70%);
   }
 
   .lg\:rounded-none {
@@ -21992,6 +22128,10 @@ table {
     color: hsl(348, 66%, 50%);
   }
 
+  .lg\:text-crimson-light {
+    color: hsl(348, 66%, 70%);
+  }
+
   .lg\:hover\:text-transparent:hover {
     color: transparent;
   }
@@ -22288,6 +22428,10 @@ table {
     color: hsl(348, 66%, 50%);
   }
 
+  .lg\:hover\:text-crimson-light:hover {
+    color: hsl(348, 66%, 70%);
+  }
+
   .lg\:focus\:text-transparent:focus {
     color: transparent;
   }
@@ -22582,6 +22726,10 @@ table {
 
   .lg\:focus\:text-crimson:focus {
     color: hsl(348, 66%, 50%);
+  }
+
+  .lg\:focus\:text-crimson-light:focus {
+    color: hsl(348, 66%, 70%);
   }
 
   .lg\:text-xs {
@@ -23317,6 +23465,10 @@ table {
     background-color: hsl(348, 66%, 50%);
   }
 
+  .xl\:bg-crimson-light {
+    background-color: hsl(348, 66%, 70%);
+  }
+
   .xl\:hover\:bg-transparent:hover {
     background-color: transparent;
   }
@@ -23613,6 +23765,10 @@ table {
     background-color: hsl(348, 66%, 50%);
   }
 
+  .xl\:hover\:bg-crimson-light:hover {
+    background-color: hsl(348, 66%, 70%);
+  }
+
   .xl\:focus\:bg-transparent:focus {
     background-color: transparent;
   }
@@ -23907,6 +24063,10 @@ table {
 
   .xl\:focus\:bg-crimson:focus {
     background-color: hsl(348, 66%, 50%);
+  }
+
+  .xl\:focus\:bg-crimson-light:focus {
+    background-color: hsl(348, 66%, 70%);
   }
 
   .xl\:bg-bottom {
@@ -24269,6 +24429,10 @@ table {
     border-color: hsl(348, 66%, 50%);
   }
 
+  .xl\:border-crimson-light {
+    border-color: hsl(348, 66%, 70%);
+  }
+
   .xl\:hover\:border-transparent:hover {
     border-color: transparent;
   }
@@ -24565,6 +24729,10 @@ table {
     border-color: hsl(348, 66%, 50%);
   }
 
+  .xl\:hover\:border-crimson-light:hover {
+    border-color: hsl(348, 66%, 70%);
+  }
+
   .xl\:focus\:border-transparent:focus {
     border-color: transparent;
   }
@@ -24859,6 +25027,10 @@ table {
 
   .xl\:focus\:border-crimson:focus {
     border-color: hsl(348, 66%, 50%);
+  }
+
+  .xl\:focus\:border-crimson-light:focus {
+    border-color: hsl(348, 66%, 70%);
   }
 
   .xl\:rounded-none {
@@ -27604,6 +27776,10 @@ table {
     color: hsl(348, 66%, 50%);
   }
 
+  .xl\:text-crimson-light {
+    color: hsl(348, 66%, 70%);
+  }
+
   .xl\:hover\:text-transparent:hover {
     color: transparent;
   }
@@ -27900,6 +28076,10 @@ table {
     color: hsl(348, 66%, 50%);
   }
 
+  .xl\:hover\:text-crimson-light:hover {
+    color: hsl(348, 66%, 70%);
+  }
+
   .xl\:focus\:text-transparent:focus {
     color: transparent;
   }
@@ -28194,6 +28374,10 @@ table {
 
   .xl\:focus\:text-crimson:focus {
     color: hsl(348, 66%, 50%);
+  }
+
+  .xl\:focus\:text-crimson-light:focus {
+    color: hsl(348, 66%, 70%);
   }
 
   .xl\:text-xs {

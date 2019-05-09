@@ -131,6 +131,7 @@ let colors = {
   // Zidane Colors
 
   'crimson': 'hsl(348, 66%, 50%)',
+  'crimson-light': 'hsl(348, 66%, 70%)',
 }
 
 module.exports = {
