@@ -18,80 +18,87 @@ class App extends React.Component {
       <div>
         <div className="app-name">tippkick</div>
       </div>
-      <div>
-        <h2>My first Apollo ap!!!!!!!</h2>
-      </div>
-      <div>
-        <h2>Games</h2>
-      </div>
-      <Games />
+      <Tournament />
     </ApolloProvider>
     )
   };
 }
 
-const Game = (game) => (
-  return
+class GameDlProperty extends React.Component {
+  render() {
+    const propertyName = this.props.propertyName;
+    const propertyValue = this.props.propertyValue;
+    return (
+      <div>
+        <dt className="inline text-crimson-light mr-3 text-xs">{propertyName}</dt>
+        <dd className="inline">{propertyValue}</dd>
+      </div>
+    );
+  }
+}
+
+class Game extends React.Component {
+  render() {
+    const game = this.props.game;
+    return (
         <div className="game">
           <dl>
-            <div>
-              <dt className="inline text-crimson-light mr-3 text-xs">ID</dt>
-              <dd className="inline">{game.id}</dd>
-            </div>
-            <div>
-              <dt className="inline text-crimson-light mr-3 text-xs">Tournament stage</dt>
-              <dd className="inline">{game.tournamentStage}</dd>
-            </div>
-            <div>
-              <dt className="inline text-crimson-light mr-3 text-xs">Kickoff at</dt>
-              <dd className="inline">{game.kickoffAt}</dd>
-            </div>
-            <div>
-              <dt className="inline text-crimson-light mr-3 text-xs">Left team</dt>
-              <dd className="inline">{game.leftTeam}</dd>
-            </div>
-            <div>
-              <dt className="inline text-crimson-light mr-3 text-xs">Right team</dt>
-              <dd className="inline">{game.rightTeam}</dd>
-            </div>
-            <div>
-              <dt className="inline text-crimson-light mr-3 text-xs">Left team score</dt>
-              <dd className="inline">{game.leftTeamScore}</dd>
-            </div>
-            <div>
-              <dt className="inline text-crimson-light mr-3 text-xs">Right team score</dt>
-              <dd className="inline">{game.rightTeamScore}</dd>
-            </div>
+            <GameDlProperty propertyName="ID" propertyValue={game.id} />
+            <GameDlProperty propertyName="Tournament stage" propertyValue={game.tournamentStage} />
+            <GameDlProperty propertyName="Kickoff at" propertyValue={game.kickoffAt} />
+            <GameDlProperty propertyName="Left team" propertyValue={game.leftTeam} />
+            <GameDlProperty propertyName="Right team" propertyValue={game.rightTeam} />
+            <GameDlProperty propertyName="Left team score" propertyValue={game.leftTeamScore} />
+            <GameDlProperty propertyName="Right team score" propertyValue={game.rightTeamScore} />
           </dl>
-        </div>;
-);
+        </div>
+      );
+  }
+};
 
-const Games = () => (
-  <Query
-    query={gql`
-      {
-        games {
-          id
-          tournamentStage
-          kickoffAt
-          leftTeam
-          rightTeam
-          leftTeamScore
-          rightTeamScore
-        }
-      }
-    `}
-  >
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error</p>;
+class Games extends React.Component {
+  render() {
+    const games = this.props.games.map((game) => (
+      <Game game={game} />
+    ));
 
-      return data.games.map((game) => (
-        <Game game={game} />
-      ));
-    }}
-  </Query>
-);
+    return(
+      <div id="games">
+        {games}
+      </div>
+    );
+  }
+}
+
+class Tournament extends React.Component {
+  render() {
+    return (
+      <Query
+        query={gql`
+          {
+            games {
+              id
+              tournamentStage
+              kickoffAt
+              leftTeam
+              rightTeam
+              leftTeamScore
+              rightTeamScore
+            }
+          }
+        `}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error</p>;
+
+          return <Games games={data.games} />;
+        }}
+      </Query>
+    );
+  }
+}
+
 
 render(<App />, document.getElementById('root'));
 
