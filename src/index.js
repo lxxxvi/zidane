@@ -15,51 +15,104 @@ class App extends React.Component {
   render() {
     return(
     <ApolloProvider client={client}>
-      <div>
-        <div className="app-name">tippkick</div>
-      </div>
-      <Tournament />
+      <div className="full flex">
+        <div className="w-3/10"></div>
+        <div className="w-2/5">
+          <div className="text-center">
+            <div className="app-name">tippkick</div>
+          </div>
+          <Tournament />
+         </div>
+         <div className="w-3/10"></div>
+       </div>
     </ApolloProvider>
     )
   };
 }
 
-class GameDlProperty extends React.Component {
+
+class GamePredictionToggler extends React.Component {
   render() {
-    const propertyName = this.props.propertyName;
-    const propertyValue = this.props.propertyValue;
-    return (
-      <div>
-        <dt className="inline text-crimson-light mr-3 text-xs">{propertyName}</dt>
-        <dd className="inline">{propertyValue}</dd>
-      </div>
-    );
+    const showPrediction = this.props.showPrediction;
+
+    if (showPrediction) {
+      return (<div className="text-center">Close</div>);
+    } else {
+      return (<div className="text-center">Predict</div>);
+    }
+  }
+}
+
+class GamePrediction extends React.Component {
+  render() {
+
+    const showPrediction = this.props.showPrediction;
+
+    if (showPrediction) {
+      return (
+        <div>
+          <div className="game-prediction flex">
+            <div className="game-prediction__left-team w-3/10 text-left">
+              [CONTROLS]
+            </div>
+            <div className="game-prediction__score w-2/5 text-center">
+              :
+            </div>
+            <div className="game-prediction__right-team w-3/10 text-right">
+              [CONTROLS]
+            </div>
+          </div>
+
+          <div>
+            <GamePredictionToggler showPrediction={showPrediction} />
+          </div>
+        </div>
+      )
+    } else {
+      return (<GamePredictionToggler showPrediction={showPrediction} />);
+    }
   }
 }
 
 class Game extends React.Component {
   render() {
     const game = this.props.game;
+
     return (
         <div className="game">
-          <dl>
-            <GameDlProperty propertyName="ID" propertyValue={game.id} />
-            <GameDlProperty propertyName="Tournament stage" propertyValue={game.tournamentStage} />
-            <GameDlProperty propertyName="Kickoff at" propertyValue={game.kickoffAt} />
-            <GameDlProperty propertyName="Left team" propertyValue={game.leftTeam} />
-            <GameDlProperty propertyName="Right team" propertyValue={game.rightTeam} />
-            <GameDlProperty propertyName="Left team score" propertyValue={game.leftTeamScore} />
-            <GameDlProperty propertyName="Right team score" propertyValue={game.rightTeamScore} />
-          </dl>
+
+          <div className="game-meta flex text-xs">
+            <div className="w-1/3 text-left">{game.tournamentStage}</div>
+            <div className="w-1/3 text-center">{game.id}</div>
+            <div className="w-1/3 text-right">{game.kickoffAt}</div>
+          </div>
+
+          <div className="actual-game-facts flex text-center">
+            <div className="actual-game-facts__left-team w-3/10">
+              {game.leftTeam}
+            </div>
+            <div className="actual-game-facts__score w-2/5">
+              {game.leftTeamScore}:{game.rightTeamScore}
+            </div>
+            <div className="actual-game-facts__right-team w-3/10">
+              {game.rightTeam}
+            </div>
+          </div>
+
+          <GamePrediction showPrediction={this.props.showPrediction} />
         </div>
       );
   }
 };
 
 class Games extends React.Component {
+  state = {
+    showPrediction: true
+  };
+
   render() {
     const games = this.props.games.map((game) => (
-      <Game game={game} />
+      <Game game={game} gamesAreExpanded={this.state.showPrediction} />
     ));
 
     return(

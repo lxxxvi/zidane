@@ -2,15 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply bg-crimson text-white;
+html, body {
+  @apply bg-crimson;
 }
 
 .app-name {
-  @apply lowercase text-center font-bold my-6 tracking-wider text-4xl;
+  @apply lowercase text-white text-center font-bold my-6 tracking-wider text-4xl inline-block;
   transform: rotate(-3deg);
 }
 
 .game {
-  @apply mt-5;
+  @apply my-6 bg-orange;
 }

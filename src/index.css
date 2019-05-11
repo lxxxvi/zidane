@@ -611,15 +611,15 @@ table {
 }
 
 .bg-orange-dark {
-  background-color: #de751f;
+  background-color: hsl(38, 74%, 53%);
 }
 
 .bg-orange {
-  background-color: #f6993f;
+  background-color: hsl(38, 94%, 59%);
 }
 
 .bg-orange-light {
-  background-color: #faad63;
+  background-color: hsl(38, 93%, 71%);
 }
 
 .bg-orange-lighter {
@@ -911,15 +911,15 @@ table {
 }
 
 .hover\:bg-orange-dark:hover {
-  background-color: #de751f;
+  background-color: hsl(38, 74%, 53%);
 }
 
 .hover\:bg-orange:hover {
-  background-color: #f6993f;
+  background-color: hsl(38, 94%, 59%);
 }
 
 .hover\:bg-orange-light:hover {
-  background-color: #faad63;
+  background-color: hsl(38, 93%, 71%);
 }
 
 .hover\:bg-orange-lighter:hover {
@@ -1211,15 +1211,15 @@ table {
 }
 
 .focus\:bg-orange-dark:focus {
-  background-color: #de751f;
+  background-color: hsl(38, 74%, 53%);
 }
 
 .focus\:bg-orange:focus {
-  background-color: #f6993f;
+  background-color: hsl(38, 94%, 59%);
 }
 
 .focus\:bg-orange-light:focus {
-  background-color: #faad63;
+  background-color: hsl(38, 93%, 71%);
 }
 
 .focus\:bg-orange-lighter:focus {
@@ -1583,15 +1583,15 @@ table {
 }
 
 .border-orange-dark {
-  border-color: #de751f;
+  border-color: hsl(38, 74%, 53%);
 }
 
 .border-orange {
-  border-color: #f6993f;
+  border-color: hsl(38, 94%, 59%);
 }
 
 .border-orange-light {
-  border-color: #faad63;
+  border-color: hsl(38, 93%, 71%);
 }
 
 .border-orange-lighter {
@@ -1883,15 +1883,15 @@ table {
 }
 
 .hover\:border-orange-dark:hover {
-  border-color: #de751f;
+  border-color: hsl(38, 74%, 53%);
 }
 
 .hover\:border-orange:hover {
-  border-color: #f6993f;
+  border-color: hsl(38, 94%, 59%);
 }
 
 .hover\:border-orange-light:hover {
-  border-color: #faad63;
+  border-color: hsl(38, 93%, 71%);
 }
 
 .hover\:border-orange-lighter:hover {
@@ -2183,15 +2183,15 @@ table {
 }
 
 .focus\:border-orange-dark:focus {
-  border-color: #de751f;
+  border-color: hsl(38, 74%, 53%);
 }
 
 .focus\:border-orange:focus {
-  border-color: #f6993f;
+  border-color: hsl(38, 94%, 59%);
 }
 
 .focus\:border-orange-light:focus {
-  border-color: #faad63;
+  border-color: hsl(38, 93%, 71%);
 }
 
 .focus\:border-orange-lighter:focus {
@@ -4946,15 +4946,15 @@ table {
 }
 
 .text-orange-dark {
-  color: #de751f;
+  color: hsl(38, 74%, 53%);
 }
 
 .text-orange {
-  color: #f6993f;
+  color: hsl(38, 94%, 59%);
 }
 
 .text-orange-light {
-  color: #faad63;
+  color: hsl(38, 93%, 71%);
 }
 
 .text-orange-lighter {
@@ -5246,15 +5246,15 @@ table {
 }
 
 .hover\:text-orange-dark:hover {
-  color: #de751f;
+  color: hsl(38, 74%, 53%);
 }
 
 .hover\:text-orange:hover {
-  color: #f6993f;
+  color: hsl(38, 94%, 59%);
 }
 
 .hover\:text-orange-light:hover {
-  color: #faad63;
+  color: hsl(38, 93%, 71%);
 }
 
 .hover\:text-orange-lighter:hover {
@@ -5546,15 +5546,15 @@ table {
 }
 
 .focus\:text-orange-dark:focus {
-  color: #de751f;
+  color: hsl(38, 74%, 53%);
 }
 
 .focus\:text-orange:focus {
-  color: #f6993f;
+  color: hsl(38, 94%, 59%);
 }
 
 .focus\:text-orange-light:focus {
-  color: #faad63;
+  color: hsl(38, 93%, 71%);
 }
 
 .focus\:text-orange-lighter:focus {
@@ -6145,6 +6145,10 @@ table {
   width: 83.33333%;
 }
 
+.w-3\/10 {
+  width: 30%;
+}
+
 .w-full {
   width: 100%;
 }
@@ -6181,24 +6185,28 @@ table {
   z-index: auto;
 }
 
-* {
+html,
+body {
   background-color: hsl(348, 66%, 50%);
-  color: #fff;
 }
 
 .app-name {
   text-transform: lowercase;
+  color: #fff;
   text-align: center;
   font-weight: 700;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   letter-spacing: .3em;
   font-size: 2.25rem;
+  display: inline-block;
   transform: rotate(-3deg);
 }
 
 .game {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: hsl(38, 94%, 59%);
 }
 
 @media (min-width: 576px) {
@@ -6302,15 +6310,15 @@ table {
   }
 
   .sm\:bg-orange-dark {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .sm\:bg-orange {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .sm\:bg-orange-light {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .sm\:bg-orange-lighter {
@@ -6602,15 +6610,15 @@ table {
   }
 
   .sm\:hover\:bg-orange-dark:hover {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .sm\:hover\:bg-orange:hover {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .sm\:hover\:bg-orange-light:hover {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .sm\:hover\:bg-orange-lighter:hover {
@@ -6902,15 +6910,15 @@ table {
   }
 
   .sm\:focus\:bg-orange-dark:focus {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .sm\:focus\:bg-orange:focus {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .sm\:focus\:bg-orange-light:focus {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .sm\:focus\:bg-orange-lighter:focus {
@@ -7266,15 +7274,15 @@ table {
   }
 
   .sm\:border-orange-dark {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .sm\:border-orange {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .sm\:border-orange-light {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .sm\:border-orange-lighter {
@@ -7566,15 +7574,15 @@ table {
   }
 
   .sm\:hover\:border-orange-dark:hover {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .sm\:hover\:border-orange:hover {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .sm\:hover\:border-orange-light:hover {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .sm\:hover\:border-orange-lighter:hover {
@@ -7866,15 +7874,15 @@ table {
   }
 
   .sm\:focus\:border-orange-dark:focus {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .sm\:focus\:border-orange:focus {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .sm\:focus\:border-orange-light:focus {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .sm\:focus\:border-orange-lighter:focus {
@@ -10613,15 +10621,15 @@ table {
   }
 
   .sm\:text-orange-dark {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .sm\:text-orange {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .sm\:text-orange-light {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .sm\:text-orange-lighter {
@@ -10913,15 +10921,15 @@ table {
   }
 
   .sm\:hover\:text-orange-dark:hover {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .sm\:hover\:text-orange:hover {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .sm\:hover\:text-orange-light:hover {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .sm\:hover\:text-orange-lighter:hover {
@@ -11213,15 +11221,15 @@ table {
   }
 
   .sm\:focus\:text-orange-dark:focus {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .sm\:focus\:text-orange:focus {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .sm\:focus\:text-orange-light:focus {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .sm\:focus\:text-orange-lighter:focus {
@@ -11812,6 +11820,10 @@ table {
     width: 83.33333%;
   }
 
+  .sm\:w-3\/10 {
+    width: 30%;
+  }
+
   .sm\:w-full {
     width: 100%;
   }
@@ -11950,15 +11962,15 @@ table {
   }
 
   .md\:bg-orange-dark {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .md\:bg-orange {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .md\:bg-orange-light {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .md\:bg-orange-lighter {
@@ -12250,15 +12262,15 @@ table {
   }
 
   .md\:hover\:bg-orange-dark:hover {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .md\:hover\:bg-orange:hover {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .md\:hover\:bg-orange-light:hover {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .md\:hover\:bg-orange-lighter:hover {
@@ -12550,15 +12562,15 @@ table {
   }
 
   .md\:focus\:bg-orange-dark:focus {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .md\:focus\:bg-orange:focus {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .md\:focus\:bg-orange-light:focus {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .md\:focus\:bg-orange-lighter:focus {
@@ -12914,15 +12926,15 @@ table {
   }
 
   .md\:border-orange-dark {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .md\:border-orange {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .md\:border-orange-light {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .md\:border-orange-lighter {
@@ -13214,15 +13226,15 @@ table {
   }
 
   .md\:hover\:border-orange-dark:hover {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .md\:hover\:border-orange:hover {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .md\:hover\:border-orange-light:hover {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .md\:hover\:border-orange-lighter:hover {
@@ -13514,15 +13526,15 @@ table {
   }
 
   .md\:focus\:border-orange-dark:focus {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .md\:focus\:border-orange:focus {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .md\:focus\:border-orange-light:focus {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .md\:focus\:border-orange-lighter:focus {
@@ -16261,15 +16273,15 @@ table {
   }
 
   .md\:text-orange-dark {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .md\:text-orange {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .md\:text-orange-light {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .md\:text-orange-lighter {
@@ -16561,15 +16573,15 @@ table {
   }
 
   .md\:hover\:text-orange-dark:hover {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .md\:hover\:text-orange:hover {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .md\:hover\:text-orange-light:hover {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .md\:hover\:text-orange-lighter:hover {
@@ -16861,15 +16873,15 @@ table {
   }
 
   .md\:focus\:text-orange-dark:focus {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .md\:focus\:text-orange:focus {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .md\:focus\:text-orange-light:focus {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .md\:focus\:text-orange-lighter:focus {
@@ -17460,6 +17472,10 @@ table {
     width: 83.33333%;
   }
 
+  .md\:w-3\/10 {
+    width: 30%;
+  }
+
   .md\:w-full {
     width: 100%;
   }
@@ -17598,15 +17614,15 @@ table {
   }
 
   .lg\:bg-orange-dark {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .lg\:bg-orange {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .lg\:bg-orange-light {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .lg\:bg-orange-lighter {
@@ -17898,15 +17914,15 @@ table {
   }
 
   .lg\:hover\:bg-orange-dark:hover {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .lg\:hover\:bg-orange:hover {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .lg\:hover\:bg-orange-light:hover {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .lg\:hover\:bg-orange-lighter:hover {
@@ -18198,15 +18214,15 @@ table {
   }
 
   .lg\:focus\:bg-orange-dark:focus {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .lg\:focus\:bg-orange:focus {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .lg\:focus\:bg-orange-light:focus {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .lg\:focus\:bg-orange-lighter:focus {
@@ -18562,15 +18578,15 @@ table {
   }
 
   .lg\:border-orange-dark {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .lg\:border-orange {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .lg\:border-orange-light {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .lg\:border-orange-lighter {
@@ -18862,15 +18878,15 @@ table {
   }
 
   .lg\:hover\:border-orange-dark:hover {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .lg\:hover\:border-orange:hover {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .lg\:hover\:border-orange-light:hover {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .lg\:hover\:border-orange-lighter:hover {
@@ -19162,15 +19178,15 @@ table {
   }
 
   .lg\:focus\:border-orange-dark:focus {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .lg\:focus\:border-orange:focus {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .lg\:focus\:border-orange-light:focus {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .lg\:focus\:border-orange-lighter:focus {
@@ -21909,15 +21925,15 @@ table {
   }
 
   .lg\:text-orange-dark {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .lg\:text-orange {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .lg\:text-orange-light {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .lg\:text-orange-lighter {
@@ -22209,15 +22225,15 @@ table {
   }
 
   .lg\:hover\:text-orange-dark:hover {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .lg\:hover\:text-orange:hover {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .lg\:hover\:text-orange-light:hover {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .lg\:hover\:text-orange-lighter:hover {
@@ -22509,15 +22525,15 @@ table {
   }
 
   .lg\:focus\:text-orange-dark:focus {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .lg\:focus\:text-orange:focus {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .lg\:focus\:text-orange-light:focus {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .lg\:focus\:text-orange-lighter:focus {
@@ -23108,6 +23124,10 @@ table {
     width: 83.33333%;
   }
 
+  .lg\:w-3\/10 {
+    width: 30%;
+  }
+
   .lg\:w-full {
     width: 100%;
   }
@@ -23246,15 +23266,15 @@ table {
   }
 
   .xl\:bg-orange-dark {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .xl\:bg-orange {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .xl\:bg-orange-light {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .xl\:bg-orange-lighter {
@@ -23546,15 +23566,15 @@ table {
   }
 
   .xl\:hover\:bg-orange-dark:hover {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .xl\:hover\:bg-orange:hover {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .xl\:hover\:bg-orange-light:hover {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .xl\:hover\:bg-orange-lighter:hover {
@@ -23846,15 +23866,15 @@ table {
   }
 
   .xl\:focus\:bg-orange-dark:focus {
-    background-color: #de751f;
+    background-color: hsl(38, 74%, 53%);
   }
 
   .xl\:focus\:bg-orange:focus {
-    background-color: #f6993f;
+    background-color: hsl(38, 94%, 59%);
   }
 
   .xl\:focus\:bg-orange-light:focus {
-    background-color: #faad63;
+    background-color: hsl(38, 93%, 71%);
   }
 
   .xl\:focus\:bg-orange-lighter:focus {
@@ -24210,15 +24230,15 @@ table {
   }
 
   .xl\:border-orange-dark {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .xl\:border-orange {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .xl\:border-orange-light {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .xl\:border-orange-lighter {
@@ -24510,15 +24530,15 @@ table {
   }
 
   .xl\:hover\:border-orange-dark:hover {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .xl\:hover\:border-orange:hover {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .xl\:hover\:border-orange-light:hover {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .xl\:hover\:border-orange-lighter:hover {
@@ -24810,15 +24830,15 @@ table {
   }
 
   .xl\:focus\:border-orange-dark:focus {
-    border-color: #de751f;
+    border-color: hsl(38, 74%, 53%);
   }
 
   .xl\:focus\:border-orange:focus {
-    border-color: #f6993f;
+    border-color: hsl(38, 94%, 59%);
   }
 
   .xl\:focus\:border-orange-light:focus {
-    border-color: #faad63;
+    border-color: hsl(38, 93%, 71%);
   }
 
   .xl\:focus\:border-orange-lighter:focus {
@@ -27557,15 +27577,15 @@ table {
   }
 
   .xl\:text-orange-dark {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .xl\:text-orange {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .xl\:text-orange-light {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .xl\:text-orange-lighter {
@@ -27857,15 +27877,15 @@ table {
   }
 
   .xl\:hover\:text-orange-dark:hover {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .xl\:hover\:text-orange:hover {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .xl\:hover\:text-orange-light:hover {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .xl\:hover\:text-orange-lighter:hover {
@@ -28157,15 +28177,15 @@ table {
   }
 
   .xl\:focus\:text-orange-dark:focus {
-    color: #de751f;
+    color: hsl(38, 74%, 53%);
   }
 
   .xl\:focus\:text-orange:focus {
-    color: #f6993f;
+    color: hsl(38, 94%, 59%);
   }
 
   .xl\:focus\:text-orange-light:focus {
-    color: #faad63;
+    color: hsl(38, 93%, 71%);
   }
 
   .xl\:focus\:text-orange-lighter:focus {
@@ -28754,6 +28774,10 @@ table {
 
   .xl\:w-5\/6 {
     width: 83.33333%;
+  }
+
+  .xl\:w-3\/10 {
+    width: 30%;
   }
 
   .xl\:w-full {

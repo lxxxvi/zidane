@@ -132,6 +132,10 @@ let colors = {
 
   'crimson': 'hsl(348, 66%, 50%)',
   'crimson-light': 'hsl(348, 66%, 70%)',
+
+  'orange-dark': 'hsl(38, 74%, 53%)',
+  'orange': 'hsl(38, 94%, 59%)',
+  'orange-light': 'hsl(38, 93%, 71%)'
 }
 
 module.exports = {
@@ -513,6 +517,7 @@ module.exports = {
     '4/5': '80%',
     '1/6': '16.66667%',
     '5/6': '83.33333%',
+    '3/10': '30%',
     'full': '100%',
     'screen': '100vw',
   },
