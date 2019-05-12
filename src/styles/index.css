@@ -14,3 +14,7 @@ html, body {
 .game {
   @apply my-6 bg-orange;
 }
+
+.game-prediction-controls {
+  @apply py-20;
+}

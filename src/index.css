@@ -6209,6 +6209,11 @@ body {
   background-color: hsl(38, 94%, 59%);
 }
 
+.game-prediction-controls {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

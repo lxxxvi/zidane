@@ -30,47 +30,79 @@ class App extends React.Component {
   };
 }
 
+const GET_TOURNAMENT_GAMES = gql`
+          {
+            games {
+              id
+              tournamentStage
+              kickoffAt
+              leftTeam
+              rightTeam
+              leftTeamScore
+              rightTeamScore
+            }
+          }
+        `
 
 class GamePredictionToggler extends React.Component {
   render() {
-    const showPrediction = this.props.showPrediction;
-
-    if (showPrediction) {
-      return (<div className="text-center">Close</div>);
+    if (this.props.showPredictionControls) {
+      return (
+        <div
+          className="text-center"
+          onClick={this.props.onTogglePredictionClick}
+        >
+          Close
+        </div>
+       );
     } else {
-      return (<div className="text-center">Predict</div>);
+      return (
+        <div
+          className="text-center"
+          onClick={this.props.onTogglePredictionClick}
+        >
+          Predict
+        </div>);
     }
+  }
+}
+
+class GamePredictionControls extends React.Component {
+  render() {
+    if (this.props.showPredictionControls) {
+      return (
+        <div className="game-prediction-controls flex">
+          <div className="game-prediction__left-team w-3/10 text-left">
+            [CONTROLS]
+          </div>
+          <div className="game-prediction__score w-2/5 text-center">
+            :
+          </div>
+          <div className="game-prediction__right-team w-3/10 text-right">
+            [CONTROLS]
+          </div>
+        </div>
+      );
+    }
+
+    return (<div></div>);
   }
 }
 
 class GamePrediction extends React.Component {
   render() {
-
-    const showPrediction = this.props.showPrediction;
-
-    if (showPrediction) {
+    const showPredictionControls = this.props.showPredictionControls;
       return (
         <div>
-          <div className="game-prediction flex">
-            <div className="game-prediction__left-team w-3/10 text-left">
-              [CONTROLS]
-            </div>
-            <div className="game-prediction__score w-2/5 text-center">
-              :
-            </div>
-            <div className="game-prediction__right-team w-3/10 text-right">
-              [CONTROLS]
-            </div>
-          </div>
-
-          <div>
-            <GamePredictionToggler showPrediction={showPrediction} />
-          </div>
+          <GamePredictionControls
+            showPredictionControls={showPredictionControls}
+          />
+          <GamePredictionToggler
+            showPredictionControls={showPredictionControls}
+            onTogglePredictionClick={this.props.onTogglePredictionClick}
+          />
         </div>
       )
-    } else {
-      return (<GamePredictionToggler showPrediction={showPrediction} />);
-    }
   }
 }
 
@@ -99,7 +131,11 @@ class Game extends React.Component {
             </div>
           </div>
 
-          <GamePrediction showPrediction={this.props.showPrediction} />
+          <GamePrediction
+            showPredictionControls={this.props.showPredictionControls}
+            onTogglePredictionClick={this.props.onTogglePredictionClick}
+            onShowPredictionClick={this.props.onShowPredictionClick}
+          />
         </div>
       );
   }
@@ -107,12 +143,20 @@ class Game extends React.Component {
 
 class Games extends React.Component {
   state = {
-    showPrediction: true
-  };
+    showPredictionControls: true
+  }
+
+  handleTogglePredictionClick = () => {
+    this.setState({ showPredictionControls: !this.state.showPredictionControls });
+  }
 
   render() {
     const games = this.props.games.map((game) => (
-      <Game game={game} gamesAreExpanded={this.state.showPrediction} />
+      <Game
+        game={game}
+        showPredictionControls={this.state.showPredictionControls}
+        onTogglePredictionClick={this.handleTogglePredictionClick}
+      />
     ));
 
     return(
@@ -126,32 +170,17 @@ class Games extends React.Component {
 class Tournament extends React.Component {
   render() {
     return (
-      <Query
-        query={gql`
-          {
-            games {
-              id
-              tournamentStage
-              kickoffAt
-              leftTeam
-              rightTeam
-              leftTeamScore
-              rightTeamScore
-            }
-          }
-        `}
-      >
+      <Query query={GET_TOURNAMENT_GAMES}>
         {({ loading, error, data }) => {
-          if (loading) return <p>Loading...</p>;
-          if (error) return <p>Error</p>;
+          if (loading) return (<p>Loading...</p>);
+          if (error) return (<p>Error</p>);
 
-          return <Games games={data.games} />;
+          return (<Games games={data.games} />);
         }}
       </Query>
     );
   }
 }
-
 
 render(<App />, document.getElementById('root'));
 
