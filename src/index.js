@@ -6,6 +6,7 @@ import { gql } from "apollo-boost";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { Query } from "react-apollo";
+import moment from 'moment';
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql"
@@ -106,6 +107,25 @@ class GamePrediction extends React.Component {
   }
 }
 
+class Kickoff extends React.Component {
+  render() {
+    return (
+      <time
+        datetime={this.props.kickoffAt}
+      >
+        {this.timeUntilKickoff()}
+      </time>
+    );
+  }
+
+  timeUntilKickoff() {
+    const kickoff = moment(this.props.kickoffAt);
+    const now = moment();
+
+    return moment.duration(kickoff.diff(now)).humanize(true);
+  }
+}
+
 class Game extends React.Component {
   render() {
     const game = this.props.game;
@@ -116,7 +136,9 @@ class Game extends React.Component {
           <div className="game-meta flex text-xs">
             <div className="w-1/3 text-left">{game.tournamentStage}</div>
             <div className="w-1/3 text-center">{game.id}</div>
-            <div className="w-1/3 text-right">{game.kickoffAt}</div>
+            <div className="w-1/3 text-right">
+              <Kickoff kickoffAt={game.kickoffAt} />
+            </div>
           </div>
 
           <div className="actual-game-facts flex text-center">
