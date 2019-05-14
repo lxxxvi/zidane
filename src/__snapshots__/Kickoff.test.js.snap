@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Kickoff 1`] = `
+<time
+  datetime="2020-06-12 18:00:00"
+>
+  in an hour
+</time>
+`;
