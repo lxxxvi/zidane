@@ -39,6 +39,10 @@ const GET_TOURNAMENT_GAMES = gql`
               rightTeam
               leftTeamScore
               rightTeamScore
+              userPrediction {
+                leftTeamScore
+                rightTeamScore
+              }
             }
           }
         `
@@ -75,7 +79,7 @@ class GamePredictionControls extends React.Component {
             [CONTROLS]
           </div>
           <div className="game-prediction__score w-2/5 text-center">
-            :
+            {this.props.leftTeamScorePrediction}:{this.props.rightTeamScorePrediction}
           </div>
           <div className="game-prediction__right-team w-3/10 text-right">
             [CONTROLS]
@@ -95,6 +99,8 @@ class GamePrediction extends React.Component {
         <div>
           <GamePredictionControls
             showPredictionControls={showPredictionControls}
+            leftTeamScorePrediction={this.props.userPrediction.leftTeamScore}
+            rightTeamScorePrediction={this.props.userPrediction.rightTeamScore}
           />
           <GamePredictionToggler
             showPredictionControls={showPredictionControls}
@@ -136,6 +142,7 @@ class Game extends React.Component {
             showPredictionControls={this.props.showPredictionControls}
             onTogglePredictionClick={this.props.onTogglePredictionClick}
             onShowPredictionClick={this.props.onShowPredictionClick}
+            userPrediction={game.userPrediction}
           />
         </div>
       );
@@ -173,8 +180,13 @@ class Tournament extends React.Component {
     return (
       <Query query={GET_TOURNAMENT_GAMES}>
         {({ loading, error, data }) => {
-          if (loading) return (<p>Loading...</p>);
-          if (error) return (<p>Error</p>);
+          if (loading) {
+            return (<p>Loading...</p>);
+          }
+          else if (error) {
+            console.log(error); // TODO REMOVEME
+            return (<p>Error</p>)
+          };
 
           return (<Games games={data.games} />);
         }}
