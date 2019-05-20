@@ -6214,6 +6214,20 @@ body {
   padding-bottom: 5rem;
 }
 
+button {
+  border-width: 1px;
+  border-color: hsl(38, 93%, 71%);
+  background-color: hsl(38, 74%, 53%);
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+button:hover {
+  background-color: hsl(38, 93%, 71%);
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

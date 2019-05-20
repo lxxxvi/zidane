@@ -40,6 +40,9 @@ const GET_TOURNAMENT_GAMES = gql`
               leftTeamScore
               rightTeamScore
               userPrediction {
+                game {
+                  id
+                }
                 leftTeamScore
                 rightTeamScore
               }
@@ -71,12 +74,24 @@ class GamePredictionToggler extends React.Component {
 }
 
 class GamePredictionControls extends React.Component {
+
+  handleUpdatePrediction = () => {
+    console.log(
+      'TODO!',
+      this.props.userPrediction.game.id,
+      this.props.userPrediction.leftTeamScore,
+      this.props.userPrediction.rightTeamScore
+    );
+  }
+
   render() {
     if (this.props.showPredictionControls) {
       return (
         <div className="game-prediction-controls flex">
           <div className="game-prediction__left-team w-3/10 text-left">
-            [CONTROLS]
+            <button
+              onClick={this.handleUpdatePrediction}
+            >Predict!</button>
           </div>
           <div className="game-prediction__score w-2/5 text-center">
             {this.props.leftTeamScorePrediction}:{this.props.rightTeamScorePrediction}
@@ -99,8 +114,7 @@ class GamePrediction extends React.Component {
         <div>
           <GamePredictionControls
             showPredictionControls={showPredictionControls}
-            leftTeamScorePrediction={this.props.userPrediction.leftTeamScore}
-            rightTeamScorePrediction={this.props.userPrediction.rightTeamScore}
+            userPrediction={this.props.userPrediction}
           />
           <GamePredictionToggler
             showPredictionControls={showPredictionControls}

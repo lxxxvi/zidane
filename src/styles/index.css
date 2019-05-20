@@ -18,3 +18,11 @@ html, body {
 .game-prediction-controls {
   @apply py-20;
 }
+
+button {
+  @apply border border-orange-light bg-orange-dark py-3 px-5;
+}
+
+button:hover {
+  @apply bg-orange-light;
+}
