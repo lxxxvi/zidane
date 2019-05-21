@@ -74,14 +74,61 @@ class GamePredictionToggler extends React.Component {
 }
 
 class GamePredictionControls extends React.Component {
+  state = {
+    predictedLeftTeamScore: this.props.userPrediction.leftTeamScore,
+    predictedRightTeamScore: this.props.userPrediction.rightTeamScore
+  }
 
-  handleUpdatePrediction = () => {
-    console.log(
-      'TODO!',
-      this.props.userPrediction.game.id,
-      this.props.userPrediction.leftTeamScore,
-      this.props.userPrediction.rightTeamScore
-    );
+  increment = (value) => {
+    return 1 + Number.parseInt(value || 0);
+  }
+
+  decrement = (value) => {
+    return -1 + Number.parseInt(value || 0);
+  }
+
+  minimumZero = (value) => {
+    if (value > 0) {
+      return value;
+    };
+
+    return 0;
+  }
+
+  decrementMinimumZero = (value) => {
+    return this.minimumZero(this.decrement(value));
+  }
+
+  incrementScore = (score) => {
+    const newValue = this.increment(this.state[score]);
+
+    this.setState({
+      [score]: newValue
+    });
+  }
+
+  decrementScore = (score) => {
+    const newValue = this.decrementMinimumZero(this.state[score]);
+
+    this.setState({
+      [score]: newValue
+    });
+  }
+
+  handleIncrementLeftTeamScore = () => {
+    this.incrementScore('predictedLeftTeamScore')
+  }
+
+  handleDecrementLeftTeamScore = () => {
+    this.decrementScore('predictedLeftTeamScore');
+  }
+
+  handleIncrementRightTeamScore = () => {
+    this.incrementScore('predictedRightTeamScore');
+  }
+
+  handleDecrementRightTeamScore = () => {
+    this.decrementScore('predictedRightTeamScore');
   }
 
   render() {
@@ -90,14 +137,27 @@ class GamePredictionControls extends React.Component {
         <div className="game-prediction-controls flex">
           <div className="game-prediction__left-team w-3/10 text-left">
             <button
-              onClick={this.handleUpdatePrediction}
-            >Predict!</button>
+              onClick={this.handleIncrementLeftTeamScore}
+            >+</button>
+            <button
+              onClick={this.handleDecrementLeftTeamScore}
+            >-</button>
           </div>
           <div className="game-prediction__score w-2/5 text-center">
-            {this.props.leftTeamScorePrediction}:{this.props.rightTeamScorePrediction}
+            <output>
+              {this.state.predictedLeftTeamScore}
+            </output>:
+            <output>
+              {this.state.predictedRightTeamScore}
+            </output>
           </div>
           <div className="game-prediction__right-team w-3/10 text-right">
-            [CONTROLS]
+            <button
+              onClick={this.handleIncrementRightTeamScore}
+            >+</button>
+            <button
+              onClick={this.handleDecrementRightTeamScore}
+            >-</button>
           </div>
         </div>
       );
