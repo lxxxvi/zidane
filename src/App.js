@@ -75,6 +75,7 @@ class GamePredictionToggler extends React.Component {
 
 class GamePredictionControls extends React.Component {
   state = {
+    gameId: this.props.userPrediction.game.id,
     predictedLeftTeamScore: this.props.userPrediction.leftTeamScore,
     predictedRightTeamScore: this.props.userPrediction.rightTeamScore
   }
@@ -99,24 +100,27 @@ class GamePredictionControls extends React.Component {
     return this.minimumZero(this.decrement(value));
   }
 
+  updateScore = (score, newValue) => {
+    this.setState(
+      {
+        [score]: newValue
+      },
+      this.updatePrediction
+    );
+  }
+
   incrementScore = (score) => {
     const newValue = this.increment(this.state[score]);
-
-    this.setState({
-      [score]: newValue
-    });
+    this.updateScore(score, newValue);
   }
 
   decrementScore = (score) => {
     const newValue = this.decrementMinimumZero(this.state[score]);
-
-    this.setState({
-      [score]: newValue
-    });
+    this.updateScore(score, newValue);
   }
 
   handleIncrementLeftTeamScore = () => {
-    this.incrementScore('predictedLeftTeamScore')
+    this.incrementScore('predictedLeftTeamScore');
   }
 
   handleDecrementLeftTeamScore = () => {
@@ -129,6 +133,15 @@ class GamePredictionControls extends React.Component {
 
   handleDecrementRightTeamScore = () => {
     this.decrementScore('predictedRightTeamScore');
+  }
+
+  updatePrediction = () => {
+    // sanitizes nil scores ???
+    this.props.handleUpdatePrediction(
+      this.state.gameId,
+      this.state.predictedLeftTeamScore,
+      this.state.predictedRightTeamScore
+    );
   }
 
   render() {
@@ -175,6 +188,7 @@ class GamePrediction extends React.Component {
           <GamePredictionControls
             showPredictionControls={showPredictionControls}
             userPrediction={this.props.userPrediction}
+            handleUpdatePrediction={this.props.handleUpdatePrediction}
           />
           <GamePredictionToggler
             showPredictionControls={showPredictionControls}
@@ -215,8 +229,8 @@ class Game extends React.Component {
           <GamePrediction
             showPredictionControls={this.props.showPredictionControls}
             onTogglePredictionClick={this.props.onTogglePredictionClick}
-            onShowPredictionClick={this.props.onShowPredictionClick}
             userPrediction={game.userPrediction}
+            handleUpdatePrediction={this.props.handleUpdatePrediction}
           />
         </div>
       );
@@ -225,19 +239,25 @@ class Game extends React.Component {
 
 class Games extends React.Component {
   state = {
-    showPredictionControls: true
+    showPredictionControls: true,
+    games: this.props.games
   }
 
   handleTogglePredictionClick = () => {
     this.setState({ showPredictionControls: !this.state.showPredictionControls });
   }
 
+  handleUpdatePrediction = (gameId, leftTeamScore, rightTeamScore) => {
+    console.log('TODO', gameId, leftTeamScore, rightTeamScore);
+  }
+
   render() {
-    const games = this.props.games.map((game) => (
+    const games = this.state.games.map((game) => (
       <Game
         game={game}
         showPredictionControls={this.state.showPredictionControls}
         onTogglePredictionClick={this.handleTogglePredictionClick}
+        handleUpdatePrediction={this.handleUpdatePrediction}
       />
     ));
 
