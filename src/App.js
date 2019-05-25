@@ -2,7 +2,7 @@ import React from 'react';
 import { gql } from "apollo-boost";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { Query } from "react-apollo";
+import { graphql } from "react-apollo";
 
 import Kickoff from './Kickoff';
 
@@ -296,27 +296,22 @@ class Games extends React.Component {
   }
 }
 
-class Tournament extends React.Component {
-  render() {
-    return (
-      <Query query={GET_TOURNAMENT_GAMES}>
-        {({ loading, error, data }) => {
-          if (loading) {
-            return (<p>Loading...</p>);
-          }
-          else if (error) {
-            console.log(error); // TODO REMOVEME
-            return (<p>Error</p>)
-          };
-
-          return (<Games games={data.games} />);
-        }}
-      </Query>
-    );
+const GamesList = ({data: {loading, error, games}}) => {
+  if (loading) {
+    return(<p>Loading</p>);
   }
+  if (error) {
+    return (<p>Error</p>);
+  }
+
+  return(<Games games={games} />)
 }
 
+const Tournament = graphql(GET_TOURNAMENT_GAMES)(GamesList);
+
+
 export default App;
+
 
 // render(<App />, document.getElementById('root'));
 
