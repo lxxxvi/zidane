@@ -81,11 +81,11 @@ class GamePredictionControls extends React.Component {
   }
 
   increment = (value) => {
-    return 1 + Number.parseInt(value || 0);
+    return 1 + Number.parseInt(value);
   }
 
   decrement = (value) => {
-    return -1 + Number.parseInt(value || 0);
+    return -1 + Number.parseInt(value);
   }
 
   minimumZero = (value) => {
@@ -100,43 +100,70 @@ class GamePredictionControls extends React.Component {
     return this.minimumZero(this.decrement(value));
   }
 
-  updateScore = (score, newValue) => {
+  updateScores = (newLeftTeamScore, newRightTeamScore) => {
     this.setState(
       {
-        [score]: newValue
+        predictedLeftTeamScore: newLeftTeamScore,
+        predictedRightTeamScore: newRightTeamScore
       },
       this.updatePrediction
     );
   }
 
-  incrementScore = (score) => {
-    const newValue = this.increment(this.state[score]);
-    this.updateScore(score, newValue);
+  incrementScore = (value) => {
+    return this.increment(value);
   }
 
-  decrementScore = (score) => {
-    const newValue = this.decrementMinimumZero(this.state[score]);
-    this.updateScore(score, newValue);
+  decrementScore = (value) => {
+    return this.decrementMinimumZero(value);
+  }
+
+  getScore = (score) => {
+    return score || 0;
+  }
+
+  modifyScore = (score, modifier = null) => {
+    if (modifier === 'increment') {
+      return this.incrementScore(score);
+    } else if (modifier === 'decrement') {
+      return this.decrementScore(score);
+    }
+  }
+
+  handlePredictionChange = (side, modifier) => {
+    const currentLeftTeamScore = this.getScore(this.state.predictedLeftTeamScore);
+    const currentRightTeamScore = this.getScore(this.state.predictedRightTeamScore);
+
+    if (side === 'left') {
+      this.updateScores(
+        this.modifyScore(currentLeftTeamScore, modifier),
+        currentRightTeamScore
+      );
+    } else if (side === 'right') {
+      this.updateScores(
+        currentLeftTeamScore,
+        this.modifyScore(currentRightTeamScore, modifier)
+      );
+    }
   }
 
   handleIncrementLeftTeamScore = () => {
-    this.incrementScore('predictedLeftTeamScore');
+    this.handlePredictionChange('left', 'increment');
   }
 
   handleDecrementLeftTeamScore = () => {
-    this.decrementScore('predictedLeftTeamScore');
+    this.handlePredictionChange('left', 'decrement');
   }
 
   handleIncrementRightTeamScore = () => {
-    this.incrementScore('predictedRightTeamScore');
+    this.handlePredictionChange('right', 'increment');
   }
 
   handleDecrementRightTeamScore = () => {
-    this.decrementScore('predictedRightTeamScore');
+    this.handlePredictionChange('right', 'decrement');
   }
 
   updatePrediction = () => {
-    // sanitizes nil scores ???
     this.props.handleUpdatePrediction(
       this.state.gameId,
       this.state.predictedLeftTeamScore,
