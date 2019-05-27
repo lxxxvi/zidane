@@ -5,7 +5,7 @@ class Kickoff extends React.Component {
   render() {
     return (
       <time
-        datetime={this.props.time}
+        dateTime={this.props.time}
       >
         {this.timeUntilKickoff()}
       </time>
