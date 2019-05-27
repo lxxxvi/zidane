@@ -1,8 +1,8 @@
 import React from 'react';
-import { gql } from "apollo-boost";
+import gql from "graphql-tag";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { graphql } from "react-apollo";
+import { graphql, Mutation } from "react-apollo";
 
 import Kickoff from './Kickoff';
 
@@ -49,6 +49,24 @@ const GET_TOURNAMENT_GAMES = gql`
             }
           }
         `
+
+const UPDATE_PREDICTION = gql`
+    mutation UpdatePrediction($gameId: ID!, $leftTeamScore: Int!, $rightTeamScore: Int!){
+      updatePrediction(
+        gameId: $gameId,
+        leftTeamScore: $leftTeamScore,
+        rightTeamScore: $rightTeamScore
+      ) {
+        prediction {
+          game {
+            id
+          }
+          leftTeamScore
+          rightTeamScore
+        }
+      }
+    }
+`
 
 class GamePredictionToggler extends React.Component {
   render() {
@@ -106,7 +124,19 @@ class GamePredictionControls extends React.Component {
         predictedLeftTeamScore: newLeftTeamScore,
         predictedRightTeamScore: newRightTeamScore
       },
-      this.updatePrediction
+      this.foobar
+    );
+  }
+
+  foobar = () => {
+    this.props.updatePrediction(
+      {
+        variables: {
+          gameId: this.state.gameId,
+          leftTeamScore: this.state.predictedLeftTeamScore,
+          rightTeamScore: this.state.predictedRightTeamScore
+        }
+      }
     );
   }
 
@@ -212,11 +242,18 @@ class GamePrediction extends React.Component {
     const showPredictionControls = this.props.showPredictionControls;
       return (
         <div>
-          <GamePredictionControls
-            showPredictionControls={showPredictionControls}
-            userPrediction={this.props.userPrediction}
-            handleUpdatePrediction={this.props.handleUpdatePrediction}
-          />
+          <Mutation mutation={UPDATE_PREDICTION}>
+            {
+              (updatePrediction, { data }) => (
+                  <GamePredictionControls
+                    showPredictionControls={showPredictionControls}
+                    userPrediction={this.props.userPrediction}
+                    handleUpdatePrediction={this.props.handleUpdatePrediction}
+                    updatePrediction={updatePrediction}
+                  />
+              )
+            }
+          </Mutation>
           <GamePredictionToggler
             showPredictionControls={showPredictionControls}
             onTogglePredictionClick={this.props.onTogglePredictionClick}
@@ -285,6 +322,7 @@ class Games extends React.Component {
         showPredictionControls={this.state.showPredictionControls}
         onTogglePredictionClick={this.handleTogglePredictionClick}
         handleUpdatePrediction={this.handleUpdatePrediction}
+        key={game.id}
       />
     ));
 
