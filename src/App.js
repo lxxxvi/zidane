@@ -51,7 +51,11 @@ const GET_TOURNAMENT_GAMES = gql`
         `
 
 const UPDATE_PREDICTION = gql`
-    mutation UpdatePrediction($gameId: ID!, $leftTeamScore: Int!, $rightTeamScore: Int!){
+    mutation UpdatePrediction(
+      $gameId: ID!,
+      $leftTeamScore: Int!,
+      $rightTeamScore: Int!
+    ) {
       updatePrediction(
         gameId: $gameId,
         leftTeamScore: $leftTeamScore,
@@ -64,6 +68,7 @@ const UPDATE_PREDICTION = gql`
           leftTeamScore
           rightTeamScore
         }
+        errors
       }
     }
 `
@@ -95,7 +100,8 @@ class GamePredictionControls extends React.Component {
   state = {
     gameId: this.props.userPrediction.game.id,
     predictedLeftTeamScore: this.props.userPrediction.leftTeamScore,
-    predictedRightTeamScore: this.props.userPrediction.rightTeamScore
+    predictedRightTeamScore: this.props.userPrediction.rightTeamScore,
+    updateErrors: []
   }
 
   increment = (value) => {
@@ -128,8 +134,8 @@ class GamePredictionControls extends React.Component {
     );
   }
 
-  foobar = () => {
-    this.props.updatePrediction(
+  foobar = async () => {
+    const response = await this.props.updatePrediction(
       {
         variables: {
           gameId: this.state.gameId,
@@ -138,6 +144,10 @@ class GamePredictionControls extends React.Component {
         }
       }
     );
+
+    this.setState({
+      updateErrors: response.data.updatePrediction.errors
+    });
   }
 
   incrementScore = (value) => {
@@ -205,6 +215,9 @@ class GamePredictionControls extends React.Component {
     if (this.props.showPredictionControls) {
       return (
         <div className="game-prediction-controls flex">
+          <div className="update-errors">
+            Errors: {this.state.updateErrors}
+          </div>
           <div className="game-prediction__left-team w-3/10 text-left">
             <button
               onClick={this.handleIncrementLeftTeamScore}
