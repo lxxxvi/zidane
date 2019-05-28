@@ -30,47 +30,52 @@ class App extends React.Component {
 }
 
 const GET_TOURNAMENT_GAMES = gql`
-          {
-            games {
-              id
-              tournamentStage
-              kickoffAt
-              leftTeam
-              rightTeam
-              leftTeamScore
-              rightTeamScore
-              userPrediction {
-                game {
-                  id
-                }
-                leftTeamScore
-                rightTeamScore
-              }
-            }
-          }
-        `
-
-const UPDATE_PREDICTION = gql`
-    mutation UpdatePrediction(
-      $gameId: ID!,
-      $leftTeamScore: Int!,
-      $rightTeamScore: Int!
-    ) {
-      updatePrediction(
-        gameId: $gameId,
-        leftTeamScore: $leftTeamScore,
-        rightTeamScore: $rightTeamScore
-      ) {
-        prediction {
-          game {
-            id
-          }
-          leftTeamScore
-          rightTeamScore
+  {
+    games {
+      id
+      tournamentStage
+      kickoffAt
+      leftTeam
+      rightTeam
+      leftTeamScore
+      rightTeamScore
+      userPrediction {
+        game {
+          id
         }
-        errors
+        leftTeamScore
+        rightTeamScore
       }
     }
+  }
+`
+
+const UPDATE_PREDICTION = gql`
+  mutation UpdatePrediction(
+    $gameId: ID!,
+    $leftTeamScore: Int!,
+    $rightTeamScore: Int!
+  ) {
+    updatePrediction(
+      gameId: $gameId,
+      leftTeamScore: $leftTeamScore,
+      rightTeamScore: $rightTeamScore
+    ) {
+      prediction {
+        game {
+          id
+        }
+        leftTeamScore
+        rightTeamScore
+        previousScoreChanges {
+          score
+          from
+          to
+        }
+      }
+      errors
+    }
+  }
 `
 
 class GamePredictionToggler extends React.Component {
@@ -99,9 +104,22 @@ class GamePredictionToggler extends React.Component {
 class GamePredictionControls extends React.Component {
   state = {
     gameId: this.props.userPrediction.game.id,
-    predictedLeftTeamScore: this.props.userPrediction.leftTeamScore,
-    predictedRightTeamScore: this.props.userPrediction.rightTeamScore,
-    updateErrors: []
+    leftTeamScore: this.props.userPrediction.leftTeamScore,
+    rightTeamScore: this.props.userPrediction.rightTeamScore,
+  }
+
+  animateCSS = (element, animationName, callback) => {
+    const node = document.querySelector(element);
+    node.classList.add('animated', animationName);
+
+    function handleAnimationEnd() {
+      node.classList.remove('animated', animationName);
+      node.removeEventListener('animationend', handleAnimationEnd);
+
+      if (typeof callback === 'function') callback()
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd);
   }
 
   increment = (value) => {
@@ -127,8 +145,8 @@ class GamePredictionControls extends React.Component {
   updateScores = (newLeftTeamScore, newRightTeamScore) => {
     this.setState(
       {
-        predictedLeftTeamScore: newLeftTeamScore,
-        predictedRightTeamScore: newRightTeamScore
+        leftTeamScore: newLeftTeamScore,
+        rightTeamScore: newRightTeamScore
       },
       this.foobar
     );
@@ -139,15 +157,25 @@ class GamePredictionControls extends React.Component {
       {
         variables: {
           gameId: this.state.gameId,
-          leftTeamScore: this.state.predictedLeftTeamScore,
-          rightTeamScore: this.state.predictedRightTeamScore
+          leftTeamScore: this.state.leftTeamScore,
+          rightTeamScore: this.state.rightTeamScore
         }
       }
     );
 
-    this.setState({
-      updateErrors: response.data.updatePrediction.errors
-    });
+    const changedScores = response.data
+                                  .updatePrediction
+                                  .prediction
+                                  .previousScoreChanges
+                                  .map((changedScore) => { return changedScore.score });
+
+    if (changedScores.includes('left_team_score')) {
+      this.animateCSS('#leftTeamScore', 'heartBeat');
+    }
+
+    if (changedScores.includes('right_team_score')) {
+      this.animateCSS('#rightTeamScore', 'heartBeat');
+    }
   }
 
   incrementScore = (value) => {
@@ -171,8 +199,8 @@ class GamePredictionControls extends React.Component {
   }
 
   handlePredictionChange = (side, modifier) => {
-    const currentLeftTeamScore = this.getScore(this.state.predictedLeftTeamScore);
-    const currentRightTeamScore = this.getScore(this.state.predictedRightTeamScore);
+    const currentLeftTeamScore = this.getScore(this.state.leftTeamScore);
+    const currentRightTeamScore = this.getScore(this.state.rightTeamScore);
 
     if (side === 'left') {
       this.updateScores(
@@ -206,52 +234,54 @@ class GamePredictionControls extends React.Component {
   updatePrediction = () => {
     this.props.handleUpdatePrediction(
       this.state.gameId,
-      this.state.predictedLeftTeamScore,
-      this.state.predictedRightTeamScore
+      this.state.leftTeamScore,
+      this.state.rightTeamScore
     );
   }
 
   render() {
-    if (this.props.showPredictionControls) {
-      return (
-        <div className="game-prediction-controls flex">
-          <div className="update-errors">
-            Errors: {this.state.updateErrors}
-          </div>
-          <div className="game-prediction__left-team w-3/10 text-left">
-            <button
-              onClick={this.handleIncrementLeftTeamScore}
-            >+</button>
-            <button
-              onClick={this.handleDecrementLeftTeamScore}
-            >-</button>
-          </div>
-          <div className="game-prediction__score w-2/5 text-center">
-            <output>
-              {this.state.predictedLeftTeamScore}
-            </output>:
-            <output>
-              {this.state.predictedRightTeamScore}
-            </output>
-          </div>
-          <div className="game-prediction__right-team w-3/10 text-right">
-            <button
-              onClick={this.handleIncrementRightTeamScore}
-            >+</button>
-            <button
-              onClick={this.handleDecrementRightTeamScore}
-            >-</button>
-          </div>
-        </div>
-      );
+    if (!this.props.showPredictionControls) {
+      return null
     }
 
-    return (<div></div>);
+    return (
+      <div className="game-prediction-controls flex">
+        <div className="game-prediction__left-team w-3/10 text-left">
+          <button
+            onClick={this.handleIncrementLeftTeamScore}
+          >+</button>
+          <button
+            onClick={this.handleDecrementLeftTeamScore}
+          >-</button>
+        </div>
+        <div className="game-prediction__score w-2/5 text-center text-4xl">
+          <output className="inline-block" id="leftTeamScore">
+            {this.state.leftTeamScore}
+          </output>:
+          <output className="inline-block" id="rightTeamScore">
+            {this.state.rightTeamScore}
+          </output>
+        </div>
+        <div className="game-prediction__right-team w-3/10 text-right">
+          <button
+            onClick={this.handleIncrementRightTeamScore}
+          >+</button>
+          <button
+            onClick={this.handleDecrementRightTeamScore}
+          >-</button>
+        </div>
+      </div>
+    );
+
   }
 }
 
 class GamePrediction extends React.Component {
   render() {
+    if (!this.props.showPredictionControls) {
+      return null;
+    }
+
     const showPredictionControls = this.props.showPredictionControls;
       return (
         <div>
@@ -267,10 +297,6 @@ class GamePrediction extends React.Component {
               )
             }
           </Mutation>
-          <GamePredictionToggler
-            showPredictionControls={showPredictionControls}
-            onTogglePredictionClick={this.props.onTogglePredictionClick}
-          />
         </div>
       )
   }
@@ -282,12 +308,11 @@ class Game extends React.Component {
 
     return (
         <div className="game">
-
           <div className="game-meta flex text-xs">
             <div className="w-1/3 text-left">{game.tournamentStage}</div>
             <div className="w-1/3 text-center">{game.id}</div>
             <div className="w-1/3 text-right">
-              <Kickoff kickoffAt={game.kickoffAt} />
+              <Kickoff time={game.kickoffAt} />
             </div>
           </div>
 
@@ -308,6 +333,11 @@ class Game extends React.Component {
             onTogglePredictionClick={this.props.onTogglePredictionClick}
             userPrediction={game.userPrediction}
             handleUpdatePrediction={this.props.handleUpdatePrediction}
+          />
+
+           <GamePredictionToggler
+            showPredictionControls={this.props.showPredictionControls}
+            onTogglePredictionClick={this.props.onTogglePredictionClick}
           />
         </div>
       );
