@@ -80,7 +80,7 @@ const UPDATE_PREDICTION = gql`
 
 class GamePredictionToggler extends React.Component {
   render() {
-    if (this.props.showPredictionControls) {
+    if (this.props.showGamePrediction) {
       return (
         <div
           className="text-center"
@@ -240,10 +240,6 @@ class GamePredictionControls extends React.Component {
   }
 
   render() {
-    if (!this.props.showPredictionControls) {
-      return null
-    }
-
     return (
       <div className="game-prediction-controls flex">
         <div className="game-prediction__left-team w-3/10 text-left">
@@ -278,33 +274,36 @@ class GamePredictionControls extends React.Component {
 
 class GamePrediction extends React.Component {
   render() {
-    if (!this.props.showPredictionControls) {
-      return null;
-    }
-
-    const showPredictionControls = this.props.showPredictionControls;
-      return (
-        <div>
-          <Mutation mutation={UPDATE_PREDICTION}>
-            {
-              (updatePrediction, { data }) => (
-                  <GamePredictionControls
-                    showPredictionControls={showPredictionControls}
-                    userPrediction={this.props.userPrediction}
-                    handleUpdatePrediction={this.props.handleUpdatePrediction}
-                    updatePrediction={updatePrediction}
-                  />
-              )
-            }
-          </Mutation>
-        </div>
-      )
+    return (
+      <div>
+        <Mutation mutation={UPDATE_PREDICTION}>
+          {
+            (updatePrediction, { data }) => (
+                <GamePredictionControls
+                  userPrediction={this.props.userPrediction}
+                  handleUpdatePrediction={this.props.handleUpdatePrediction}
+                  updatePrediction={updatePrediction}
+                />
+            )
+          }
+        </Mutation>
+      </div>
+    )
   }
 }
 
 class Game extends React.Component {
   render() {
     const game = this.props.game;
+    let gamePrediction;
+
+    if (this.props.showGamePrediction) {
+      gamePrediction = <GamePrediction
+            onTogglePredictionClick={this.props.onTogglePredictionClick}
+            userPrediction={game.userPrediction}
+            handleUpdatePrediction={this.props.handleUpdatePrediction}
+          />
+    }
 
     return (
         <div className="game">
@@ -328,15 +327,10 @@ class Game extends React.Component {
             </div>
           </div>
 
-          <GamePrediction
-            showPredictionControls={this.props.showPredictionControls}
-            onTogglePredictionClick={this.props.onTogglePredictionClick}
-            userPrediction={game.userPrediction}
-            handleUpdatePrediction={this.props.handleUpdatePrediction}
-          />
+          {gamePrediction}
 
            <GamePredictionToggler
-            showPredictionControls={this.props.showPredictionControls}
+            showGamePrediction={this.props.showGamePrediction}
             onTogglePredictionClick={this.props.onTogglePredictionClick}
           />
         </div>
@@ -346,12 +340,12 @@ class Game extends React.Component {
 
 class Games extends React.Component {
   state = {
-    showPredictionControls: true,
+    showGamePrediction: false,
     games: this.props.games
   }
 
   handleTogglePredictionClick = () => {
-    this.setState({ showPredictionControls: !this.state.showPredictionControls });
+    this.setState({ showGamePrediction: !this.state.showGamePrediction });
   }
 
   handleUpdatePrediction = (gameId, leftTeamScore, rightTeamScore) => {
@@ -362,7 +356,7 @@ class Games extends React.Component {
     const games = this.state.games.map((game) => (
       <Game
         game={game}
-        showPredictionControls={this.state.showPredictionControls}
+        showGamePrediction={this.state.showGamePrediction}
         onTogglePredictionClick={this.handleTogglePredictionClick}
         handleUpdatePrediction={this.handleUpdatePrediction}
         key={game.id}
