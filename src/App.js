@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { graphql, Mutation } from "react-apollo";
+import gameScoreService from './services/gameScoreService'
 
 import Kickoff from './Kickoff';
 
@@ -122,26 +123,6 @@ class GamePredictionControls extends React.Component {
     node.addEventListener('animationend', handleAnimationEnd);
   }
 
-  increment = (value) => {
-    return 1 + Number.parseInt(value);
-  }
-
-  decrement = (value) => {
-    return -1 + Number.parseInt(value);
-  }
-
-  minimumZero = (value) => {
-    if (value > 0) {
-      return value;
-    };
-
-    return 0;
-  }
-
-  decrementMinimumZero = (value) => {
-    return this.minimumZero(this.decrement(value));
-  }
-
   updateScores = (newLeftTeamScore, newRightTeamScore) => {
     this.setState(
       {
@@ -178,57 +159,15 @@ class GamePredictionControls extends React.Component {
     }
   }
 
-  incrementScore = (value) => {
-    return this.increment(value);
-  }
-
-  decrementScore = (value) => {
-    return this.decrementMinimumZero(value);
-  }
-
-  getScore = (score) => {
-    return score || 0;
-  }
-
-  modifyScore = (score, modifier = null) => {
-    if (modifier === 'increment') {
-      return this.incrementScore(score);
-    } else if (modifier === 'decrement') {
-      return this.decrementScore(score);
-    }
-  }
-
   handlePredictionChange = (side, modifier) => {
-    const currentLeftTeamScore = this.getScore(this.state.leftTeamScore);
-    const currentRightTeamScore = this.getScore(this.state.rightTeamScore);
+    const newScores = gameScoreService.calculate(
+      this.state.leftTeamScore,
+      this.state.rightTeamScore,
+      side,
+      modifier
+    );
 
-    if (side === 'left') {
-      this.updateScores(
-        this.modifyScore(currentLeftTeamScore, modifier),
-        currentRightTeamScore
-      );
-    } else if (side === 'right') {
-      this.updateScores(
-        currentLeftTeamScore,
-        this.modifyScore(currentRightTeamScore, modifier)
-      );
-    }
-  }
-
-  handleIncrementLeftTeamScore = () => {
-    this.handlePredictionChange('left', 'increment');
-  }
-
-  handleDecrementLeftTeamScore = () => {
-    this.handlePredictionChange('left', 'decrement');
-  }
-
-  handleIncrementRightTeamScore = () => {
-    this.handlePredictionChange('right', 'increment');
-  }
-
-  handleDecrementRightTeamScore = () => {
-    this.handlePredictionChange('right', 'decrement');
+    this.updateScores(newScores.leftTeamScore, newScores.rightTeamScore);
   }
 
   updatePrediction = () => {
@@ -244,10 +183,10 @@ class GamePredictionControls extends React.Component {
       <div className="game-prediction-controls flex">
         <div className="game-prediction__left-team w-3/10 text-left">
           <button
-            onClick={this.handleIncrementLeftTeamScore}
+            onClick={() => this.handlePredictionChange('left', 'increment')}
           >+</button>
           <button
-            onClick={this.handleDecrementLeftTeamScore}
+            onClick={() => this.handlePredictionChange('left', 'decrement')}
           >-</button>
         </div>
         <div className="game-prediction__score w-2/5 text-center text-4xl">
@@ -260,10 +199,10 @@ class GamePredictionControls extends React.Component {
         </div>
         <div className="game-prediction__right-team w-3/10 text-right">
           <button
-            onClick={this.handleIncrementRightTeamScore}
+            onClick={() => this.handlePredictionChange('right', 'increment')}
           >+</button>
           <button
-            onClick={this.handleDecrementRightTeamScore}
+            onClick={() => this.handlePredictionChange('right', 'decrement')}
           >-</button>
         </div>
       </div>
