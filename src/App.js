@@ -4,6 +4,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { graphql, Mutation } from "react-apollo";
 import gameScoreService from './services/gameScoreService'
+import animateCSS from './services/animateCSS'
 
 import Kickoff from './Kickoff';
 
@@ -109,31 +110,17 @@ class GamePredictionControls extends React.Component {
     rightTeamScore: this.props.userPrediction.rightTeamScore,
   }
 
-  animateCSS = (element, animationName, callback) => {
-    const node = document.querySelector(element);
-    node.classList.add('animated', animationName);
-
-    function handleAnimationEnd() {
-      node.classList.remove('animated', animationName);
-      node.removeEventListener('animationend', handleAnimationEnd);
-
-      if (typeof callback === 'function') callback()
-    }
-
-    node.addEventListener('animationend', handleAnimationEnd);
-  }
-
   updateScores = (newLeftTeamScore, newRightTeamScore) => {
     this.setState(
       {
         leftTeamScore: newLeftTeamScore,
         rightTeamScore: newRightTeamScore
       },
-      this.foobar
+      this.savePrediction
     );
   }
 
-  foobar = async () => {
+  savePrediction = async () => {
     const response = await this.props.updatePrediction(
       {
         variables: {
@@ -151,11 +138,11 @@ class GamePredictionControls extends React.Component {
                                   .map((changedScore) => { return changedScore.score });
 
     if (changedScores.includes('left_team_score')) {
-      this.animateCSS('#leftTeamScore', 'heartBeat');
+      animateCSS('#leftTeamScore', 'heartBeat');
     }
 
     if (changedScores.includes('right_team_score')) {
-      this.animateCSS('#rightTeamScore', 'heartBeat');
+      animateCSS('#rightTeamScore', 'heartBeat');
     }
   }
 
