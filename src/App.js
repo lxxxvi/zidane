@@ -103,11 +103,31 @@ class GamePredictionToggler extends React.Component {
   }
 }
 
+class GamePredictionScore extends React.Component {
+  render() {
+    let animationClasses;
+
+    if(this.props.animate) {
+      animationClasses = "animate heartBeat";
+    }
+
+    return(
+      <output
+        className={`inline-block ${animationClasses}`}
+      >
+        {this.props.score}
+      </output>
+    );
+  }
+}
+
 class GamePredictionControls extends React.Component {
   state = {
     gameId: this.props.userPrediction.game.id,
     leftTeamScore: this.props.userPrediction.leftTeamScore,
     rightTeamScore: this.props.userPrediction.rightTeamScore,
+    animateLeftTeamScore: false,
+    animateRightTeamScore: false,
   }
 
   updateScores = (newLeftTeamScore, newRightTeamScore) => {
@@ -131,19 +151,45 @@ class GamePredictionControls extends React.Component {
       }
     );
 
-    const changedScores = response.data
-                                  .updatePrediction
-                                  .prediction
-                                  .previousScoreChanges
-                                  .map((changedScore) => { return changedScore.score });
+    const updatedPrediction = response.data
+                                      .updatePrediction
+                                      .prediction;
+    updatedPrediction.previousScoreChanges
+                     .map((changedScore) => {
+      this.setState(
+      {
+        [changedScore.score]: changedScore.to
+      }
+      );
+      return null;
+    });
 
-    if (changedScores.includes('left_team_score')) {
-      animateCSS('#leftTeamScore', 'heartBeat');
-    }
+    // console.log(changedScores);
 
-    if (changedScores.includes('right_team_score')) {
-      animateCSS('#rightTeamScore', 'heartBeat');
-    }
+    // for (item in changedScores) {
+    //   this.setState(
+    //   {
+    //     [item.score]: item.to
+    //   }
+    //   );
+    // }
+    // changedScores.map((item) {
+    //   this.setState(
+    //   {
+    //     [item.score]: item.to
+    //   }
+    //   );
+    // });
+
+    // if (changedScores.includes('left_team_score')) {
+    //   this.setState({
+    //     animateLeftTeamScore: true
+    //   });
+    // }
+
+    // if (changedScores.includes('right_team_score')) {
+    //   animateCSS('#rightTeamScore', 'heartBeat');
+    // }
   }
 
   handlePredictionChange = (side, modifier) => {
@@ -177,9 +223,10 @@ class GamePredictionControls extends React.Component {
           >-</button>
         </div>
         <div className="game-prediction__score w-2/5 text-center text-4xl">
-          <output className="inline-block" id="leftTeamScore">
-            {this.state.leftTeamScore}
-          </output>:
+          <GamePredictionScore
+            score={this.state.leftTeamScore}
+            animate={this.state.animateLeftTeamScore}
+          />:
           <output className="inline-block" id="rightTeamScore">
             {this.state.rightTeamScore}
           </output>
