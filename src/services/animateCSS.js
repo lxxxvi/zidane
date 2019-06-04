@@ -1,5 +1,6 @@
 const animateCSS = (element, animationName, callback) => {
-  const node = document.querySelector(element);
+  const node = typeof element === "string" ?  document.querySelector(element) : element
+
   node.classList.add('animated', animationName);
 
   function handleAnimationEnd() {
